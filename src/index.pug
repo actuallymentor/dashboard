@@ -6,30 +6,29 @@ html( lang="en" )
 	body
 		main
 
-			div#wake.card
-				h2 Wake-up
-				ul
-					li.bold weekday ? limber+strength : limber
-					li.bold meditate 10 minutes
-					li weather == sunny ? spf : vit c || moisturiser
+			h1 Today:
+			input( type='text' )#mit.todo
+			input( type='text' )#lit.todo
 
-			div#plan.card
-				h2 Planning
-				ul
-					li.bold Set MIT
-					li workouts < 3 ? <b>VO2 || big 3 || kettlebell</b> : sauna
-					li if( !massage ) plan massage
+			h2 Habits:
 
-			div#evening.card.trans
-				h2 Evening
-				ul
-					li.bold if( time > 19:00 ) block blue light
-					li if( time > 21:00 ) no screens && <b>no internet && meditate</b>
-					li retinol 1% || 0.2%
+			ul.habits
+				li.bold weekday ? limber+strength : limber
+				li.bold meditate 10 minutes
+				li weather == sunny ? spf : vit c || moisturiser
 
-			div#incidentals.card
-				h2 Incidentals
-				ul
-					li if( <a href='http://www.multpl.com/shiller-pe/'>CAPE</a> < 16.8 ) enable dollar cost averaging
-					li if( weekend ) face mask
+			ul.habits
+				li.bold Set MIT
+				li workouts < 3 ? <b>VO2 || big 3 || kettlebell</b> : sauna
+				li if( !massage ) plan massage
+
+			ul.habits
+				li.bold if( time > 19:00 ) block blue light
+				li if( time > 21:00 ) no screens && <b>no internet && meditate</b>
+				li retinol 1% || 0.2%
+
+			ul.habits
+				li if( <a href='https://www.starcapital.de/en/research/stock-market-valuation/'>CAPE</a> < 16.8 ) enable dollar cost averaging
+				li if( weekend ) face mask
+
 		include pug/_footer.pug
