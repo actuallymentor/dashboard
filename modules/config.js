@@ -3,15 +3,15 @@ const ip = require( 'ip' )
 module.exports = {
 	// Identity variables used in pug templates
 	identity: {
-		title: "Website",
-		desc: "Description of website",
+		title: "Mentor's Dashboard",
+		desc: "",
 		"logo": "logo.jpg"
 	},
 	// System vars managing some pug elements as well as file paths
 	system: {
 		public: process.env.NODE_ENV == 'production' ? __dirname + '/../docs/' : __dirname + '/../public/',
 		source: __dirname + '/../src/',
-		url: process.env.NODE_ENV == 'production' ? 'https://actuallymentor.github.io/webpack-frontend-only/' : 'http://' + ip.address() + ':3000/',
+		url: process.env.NODE_ENV == 'production' ? 'https://actuallymentor.github.io/dashboard/' : 'http://' + ip.address() + ':3000/',
 		gverification: undefined,
 		timestamp: new Date().getTime(),
 		year: new Date().getFullYear()
