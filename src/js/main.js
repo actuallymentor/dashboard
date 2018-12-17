@@ -1,7 +1,7 @@
 import Cookie from 'js-cookie'
 const date = new Date()
 const hour = date.getHours()
-// const midnight = new Date( ).setHours(24,0,0,0)
+const midnight = new Date( ).setHours(24,0,0,0)
 // { expires: midnight }
 
 const q = query => document.querySelector( query )
@@ -38,8 +38,7 @@ window.onload = f => {
 		// Set listener
 		habits[i].addEventListener( 'click', event => {
 			event.target.classList.toggle( 'strike' )
-			console.log( `Set habit${i} to ${event.target.classList.contains( 'strike' )}` )
-			Cookie.set( `habit${i}`, event.target.classList.contains( 'strike' ) )
+			Cookie.set( `habit${i}`, event.target.classList.contains( 'strike' ), { expires: midnight } )
 		} )
 		// Get previous tag states
 		if( Cookie.get( `habit${i}` ) == 'true' ) habits[i].classList.toggle( 'strike' )
