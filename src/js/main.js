@@ -1,7 +1,7 @@
 import Cookie from 'js-cookie'
 const date = new Date()
 const hour = date.getHours()
-const midnight = new Date( ).setHours(24,0,0,0)
+const midnight = new Date( new Date( ).setHours(24,0,0,0) ) // Make epuch midnight and create data obj from it
 // { expires: midnight }
 
 const q = query => document.querySelector( query )

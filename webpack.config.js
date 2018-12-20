@@ -93,7 +93,8 @@ const maps = env => {
 }
 
 module.exports = ( ) => {
-  return Promise.all( [ publishpug( site ), publishassets( site ), css( site ) ] )
+  return publishassets( site )
+  .then( f => Promise.all( [ publishpug( site ), css( site ) ] ) )
   .then( f => {
     console.log( 'Initial build done' )
     return {
