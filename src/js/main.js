@@ -2,6 +2,7 @@ import Cookie from 'js-cookie'
 const date = new Date()
 const currentHour = date.getHours()
 const midnight = new Date( new Date( ).setHours(24,0,0,0) ) // Make epuch midnight and create data obj from it
+const weekFromNow = new Date( midnight.getDate() + 6 )
 // { expires: midnight }
 
 const q = query => document.querySelector( query )
@@ -55,7 +56,9 @@ window.onload = f => {
 		// Set listener
 		habits[i].addEventListener( 'click', event => {
 			event.target.classList.toggle( 'hide' )
-			Cookie.set( `habit${i}`, event.target.classList.contains( 'hide' ), { expires: midnight } )
+			Cookie.set( `habit${i}`, event.target.classList.contains( 'hide' ), {
+				expires: event.target.classList.contains( 'weekly' ) ? weekFromNow : midnight
+			} )
 		} )
 		// Get previous tag states
 		if( Cookie.get( `habit${i}` ) == 'true' ) habits[i].classList.toggle( 'hide' )
