@@ -1,5 +1,5 @@
 - const page = { title: 'Home', desc: 'Home page', published: '2017-01-01', url: '/', featuredimg: '/image.jpg' }
-
+- const capelink = 'http://www.multpl.com/shiller-pe/'
 doctype html
 html( lang="en" )
 	include pug/_header.pug
@@ -8,27 +8,34 @@ html( lang="en" )
 
 			h1 Today:
 			input( type='text' )#mit.todo
-			input( type='text' )#lit.todo
+			//- input( type='text' )#lit.todo
 
-			h2 Habits:
+			div#habits.hide
+				h2 Habits:
+				ul.habits.before12
+					li dreams && journal
+					li.bold weekday ? limber+strength : limber
+					li.bold meditate 10 minutes
+					li whatsapp friends && tea
+					li weather == sunny ? spf : vit c || moisturiser
+					li japanese
 
-			ul.habits
-				li.bold weekday ? limber+strength : limber
-				li.bold meditate 10 minutes
-				li weather == sunny ? spf : vit c || moisturiser
+				ul.habits
+					li.bold Set MIT
+					li workouts < 3 ? <b>VO2 || big 3 || kettlebell</b> : sauna
+					li massage || plan
+					li friend dinner || plan
+					li sauna day || plan
 
-			ul.habits
-				li.bold Set MIT
-				li workouts < 3 ? <b>VO2 || big 3 || kettlebell</b> : sauna
-				li if( !massage ) plan massage
+				ul.habits
+					li.bold.after19 if( time > 19:00 ) block blue light
+					li.after21 if( time > 21:00 ) no screens && <b>no internet && meditate</b>
+					li.after21 retinol 1% || 0.2%
 
-			ul.habits
-				li.bold if( time > 19:00 ) block blue light
-				li if( time > 21:00 ) no screens && <b>no internet && meditate</b>
-				li retinol 1% || 0.2%
-
-			ul.habits
-				li if( <a href='https://www.starcapital.de/en/research/stock-market-valuation/'>CAPE</a> < 16.8 ) enable dollar cost averaging
-				li if( weekend ) face mask
+				ul.habits
+					li <a href=#{ capelink }>CAPE</a> < 16.8 && enable dollar cost averaging
+					li weekend && peel
+				p.center
+					a( href='#' )#reset reset
 
 		include pug/_footer.pug
