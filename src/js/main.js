@@ -1,10 +1,6 @@
 import Cookie from 'js-cookie'
-const date = new Date()
-const currentHour = date.getHours()
-const midnight = new Date( new Date( ).setHours(24,0,0,0) ) // Make epuch midnight and create data obj from it
-const weekFromNow = new Date( midnight.getDate() + 6 )
-// { expires: midnight }
 
+// Helpers
 const q = query => document.querySelector( query )
 const qa = query => document.querySelectorAll( query )
 const untrans = query => q( query ).classList.remove( 'hide' )
@@ -17,6 +13,24 @@ const itemTime = item => {
 		time: match[2]
 	}
 }
+const dayDistance = ( start, target ) => ( target > start ) ? ( target - start ) : ( 7 + ( target - start ) )
+
+// Dates etc
+const date = new Date()
+const currentHour = date.getHours()
+const currentDayOfWeek = date.getDay() // Note: sunday is 0, saturday 6
+const currentDayOfMonth = date.getDate()
+
+// Make epoch midnight and create data obj from it
+const midnight = new Date( new Date( ).setHours(24,0,0,0) )
+// Make epoch week from now and make date object form it
+const weekFromNow = new Date( new Date( ).setDate( currentDayOfMonth + 6 ) )
+// Make poch of week from now and make date object from it
+const nextFriday = new Date( new Date( ).setDate( currentDayOfMonth + dayDistance( currentDayOfWeek, 5 ) ) )
+
+console.log( `Current day ${currentDayOfWeek} (sunday 0, saturday 6), distance to friday ${dayDistance( currentDayOfWeek, 5 )}` )
+
+
 
 window.onload = f => {
 
@@ -33,6 +47,7 @@ window.onload = f => {
 	const inputs = qa( "input[type='text']" )
 	for (var i = inputs.length - 1; i >= 0; i--) {
 		inputs[i].addEventListener( 'keyup', event => event.target.style.width = `${ event.target.value.length }rem` )
+		inputs[i].style.width = `${ inputs[i].value.length }rem`
 	}
 
 	// Get MIT cookie, if present, populate input
@@ -56,8 +71,11 @@ window.onload = f => {
 		// Set listener
 		habits[i].addEventListener( 'click', event => {
 			event.target.classList.toggle( 'hide' )
+			console.log( 'Cookie ', `habit${i}`, event.target.classList.contains( 'hide' ), {
+				expires: event.target.classList.contains( 'weekly' ) ? nextFriday : midnight
+			} )
 			Cookie.set( `habit${i}`, event.target.classList.contains( 'hide' ), {
-				expires: event.target.classList.contains( 'weekly' ) ? weekFromNow : midnight
+				expires: event.target.classList.contains( 'weekly' ) ? nextFriday : midnight
 			} )
 		} )
 		// Get previous tag states
