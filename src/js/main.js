@@ -34,6 +34,20 @@ console.log( `Current day ${currentDayOfWeek} (sunday 0, saturday 6), distance t
 
 window.onload = f => {
 
+	// Get MIT cookie, if present, populate input
+	Promise.resolve( Cookie.get( 'mit' ) )
+	.then( mit => q( '#mit' ).value = mit || 'Most Important Todo...')
+	.then( f => {
+		// Set input width on change
+		const inputs = qa( "input[type='text']" )
+		for (var i = inputs.length - 1; i >= 0; i--) {
+			inputs[i].addEventListener( 'keyup', event => event.target.style.width = `${ event.target.value.length }rem` )
+			inputs[i].style.width = `${ inputs[i].value.length }rem`
+		}
+	} )
+	// If MIT input changes, set cookie
+	q( '#mit' ).addEventListener( 'keyup', event => Cookie.set( 'mit', event.target.value ) )
+
 	// Show habits on load
 	q( '#habits' ).classList.remove( 'hide' )
 
@@ -43,24 +57,6 @@ window.onload = f => {
 	  location.reload()
 	} ) )
 
-	// Set input width on change
-	const inputs = qa( "input[type='text']" )
-	for (var i = inputs.length - 1; i >= 0; i--) {
-		inputs[i].addEventListener( 'keyup', event => event.target.style.width = `${ event.target.value.length }rem` )
-		inputs[i].style.width = `${ inputs[i].value.length }rem`
-	}
-
-	// Get MIT cookie, if present, populate input
-	Promise.resolve( Cookie.get( 'mit' ) )
-	.then( mit => q( '#mit' ).value = mit || 'Most Important Todo...')
-	// If MIT input changes, set cookie
-	q( '#mit' ).addEventListener( 'keyup', event => Cookie.set( 'mit', event.target.value ) )
-
-	// // Get LIT cookie, if present, populate input
-	// Promise.resolve( Cookie.get( 'lit' ) )
-	// .then( lit => q( '#lit' ).value = lit || 'Less Important Todo...')
-	// // If LIT input changes, set cookie
-	// q( '#lit' ).addEventListener( 'keyup', event => Cookie.set( 'lit', event.target.value ) )
 
 	// Tag clicked todos
 	const habits = qa( '.habits li' )
